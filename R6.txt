@@ -1,0 +1,31 @@
+--I'm a Chinese player. The translation is terrible. I'll make do with it
+--This game needs to match the proper X-axis jitter
+
+X = 1   --X-axis jitter,The higher the value, the more applicable it is to C8 and Evo guns
+Y = 1   --Y-axis down,This is matched with the x-axis adjustment
+sleep = 15   --At the moment, I think 15 milliseconds is the best
+
+
+function OnEvent(event, arg)
+	EnablePrimaryMouseButtonEvents(true)
+if (event == "MOUSE_BUTTON_PRESSED" and arg == 4) then
+		A = true
+		ClearLog()
+		OutputLogMessage("On\n")
+end
+
+if (event == "MOUSE_BUTTON_PRESSED" and arg == 5) then
+		A = false
+		ClearLog()
+		OutputLogMessage("Off\n")
+end
+
+        
+if (event == "MOUSE_BUTTON_PRESSED" and arg == 1 and A==true) then
+	repeat
+		MoveMouseRelative(X, Y)
+		X = -X   --crux
+		Sleep(sleep)
+	until not IsMouseButtonPressed(1)
+end
+end
